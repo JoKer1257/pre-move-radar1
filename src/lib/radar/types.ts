@@ -24,6 +24,7 @@ export type TradePrint = {
 export type Swing = {
   index: number;
   t: number;
+  confirmedAt: number;
   price: number;
   kind: "H" | "L";
 };
@@ -160,6 +161,10 @@ export type ReviewStats = {
   chop: number;
   voided: number;
   hitRate: number | null;
+  directionalRate: number | null;
+  manualHit: number;
+  manualMiss: number;
+  manualVoid: number;
   byState: { ARMED: ReviewBucket; TRIGGERED: ReviewBucket };
   byBias: { LONG: ReviewBucket; SHORT: ReviewBucket };
   reasons: { reason: string; sample: number; hitRate: number | null }[];
