@@ -1,0 +1,13 @@
+node_modules
+dist
+.output
+.vercel
+.vite
+data
+*.log
+.DS_Store
+.env
+.env.local
+public/pre-move-radar-src.zip
+artifacts
+screenshots
