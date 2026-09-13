@@ -13,9 +13,7 @@ export function ema(values: number[], period: number): number | null {
   let prev = 0;
   for (let i = 0; i < period; i++) prev += values[i]!;
   prev /= period;
-  for (let i = period; i < values.length; i++) {
-    prev = values[i]! * k + prev * (1 - k);
-  }
+  for (let i = period; i < values.length; i++) prev = values[i]! * k + prev * (1 - k);
   return prev;
 }
 
@@ -34,9 +32,7 @@ export function trueRange(prev: Candle, cur: Candle): number {
 export function atr(candles: Candle[], period = 14): number | null {
   if (candles.length < period + 1) return null;
   const trs: number[] = [];
-  for (let i = 1; i < candles.length; i++) {
-    trs.push(trueRange(candles[i - 1]!, candles[i]!));
-  }
+  for (let i = 1; i < candles.length; i++) trs.push(trueRange(candles[i - 1]!, candles[i]!));
   return sma(trs, period);
 }
 
@@ -81,11 +77,11 @@ export function closedBars(candles: Candle[] | undefined, intervalMs: number, no
   return candles.filter((c) => {
     if (!c.confirmed) return false;
     if (!Number.isFinite(c.t) || c.t <= 0) return false;
-    return c.t + intervalMs <= now + 2000;
+    return c.t + intervalMs <= now;
   });
 }
 
-/** @deprecated use closedBars — never fall back to the forming candle */
+/** @deprecated use closedBars */
 export function confirmed(candles: Candle[]): Candle[] {
   return closedBars(candles, 0, Number.POSITIVE_INFINITY);
 }
